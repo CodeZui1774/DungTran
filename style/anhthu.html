@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tâm Thư</title>
+    <style>
+        .polaroid {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border: 6px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+            overflow: hidden;
+            z-index: 2;
+            opacity: 0;
+            animation: photoFadeIn 0.9s ease forwards;
+        }
+        .photo1 { left: -75px; top: -80px; --rotate: -15deg; animation-delay: 0.2s; }
+        .photo2 { left: 80px; top: -100px; --rotate: 11deg; animation-delay: 0.4s; }
+        .photo3 { right: -80px; top: -80px; --rotate: -15deg; animation-delay: 0.6s; }
+        .photo4 { left: -90px; top: 120px; --rotate: -4deg; animation-delay: 0.8s; }
+        .photo5 { right: -140px; top: 140px; --rotate: 10deg; animation-delay: 1s; }
+        .photo6 { left: -100px; bottom: -80px; --rotate: 8deg; animation-delay: 1.2s; }
+        .photo7 { right: -100px; bottom: -100px; --rotate: 30deg; animation-delay: 1.4s; }
+        .photo8 { left: 80px; bottom: -100px; --rotate: -6deg; animation-delay: 1.6s; }
+
+        @keyframes photoFadeIn {
+            0% { opacity: 0; transform: translateY(-40px) scale(0.8) rotate(-10deg); }
+            100% { opacity: 1; transform: translateY(0) scale(1) rotate(var(--rotate)); }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('img/background1.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Dancing Script', cursive;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: gradientBG 12s ease infinite;
+        }
+
+        
+        @keyframes gradientBG {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+        }
+
+        .wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .letter-container {
+            background-color: #FFF5EE;
+            width: 250px;
+            max-width: 100%;
+            height: 450px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            transform: rotate(1.8deg);
+            justify-content: center;
+            animation: letterFadeIn 1.2s ease;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        @keyframes letterFadeIn {
+            0% { opacity: 0; transform: translateY(40px) scale(0.95) rotate(1.8deg); }
+            100% { opacity: 1; transform: translateY(0) scale(1) rotate(1.8deg); }
+        }
+
+        .letter-body {
+            line-height: 1.5;
+            color: #DB7093;
+            font-size: 18px;
+            text-align: justify;
+            padding: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            display: block;
+            transform: rotate(1.2deg);
+            transform-origin: center;
+            overflow-y: auto;
+        }
+
+        .letter-body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .letter-body p { margin: 5px 0; }
+
+        .surprise-button {
+            background-color: #DB7093;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            transition: background-color 0.3s;
+        }
+        .surprise-button:hover { background-color: #C71585; }
+
+        #letterText {
+          white-space: pre-line;
+        }
+
+        @media (max-width: 500px) { .wrapper > div { transform: scale(0.85); } }
+        @media (max-width: 400px) { .wrapper > div { transform: scale(0.75); } }
+        @media (max-width: 350px) { .wrapper > div { transform: scale(0.65); } }
+
+        .polaroid:hover{
+            width: 100px;
+            height: 100px;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            color: #DB7093;
+            animation: bounce 1s infinite;
+            cursor: pointer;
+            display: none; /* mặc định ẩn */
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <div style="position:relative;width:250px;height:450px;">
+            <!-- Ảnh polaroid -->
+            <div class="polaroid photo1"><img src="img/Anh (3).jpg" alt="Ảnh 1" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo2"><img src="img/Anh (4).jpg" alt="Ảnh 2" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo3"><img src="img/Anh (5).jpg" alt="Ảnh 3" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo4"><img src="img/Anh (6).jpg" alt="Ảnh 4" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo5"><img src="img/Anh (7).jpg" alt="Ảnh 5" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo6"><img src="img/Anh (11).jpg" alt="Ảnh 6" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo7"><img src="img/Anh (9).jpg" alt="Ảnh 7" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div class="polaroid photo8"><img src="img/Anh (10).jpg" alt="Ảnh 8" style="width:100%;height:100%;object-fit:cover;"></div>
+
+            <!-- Thư -->
+            <div class="letter-container" style="position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;">
+                <div class="letter-body">
+                    <p id="letterText"></p>
+                    <button class="surprise-button" id="surpriseBtn" onclick="goNext()" style="display:none;">
+                        Bất ngờ đây!
+                    </button>
+                </div>
+                 <div class="scroll-down" id="scrollDown">❤️⬇️❤️</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nhạc nền -->
+    <audio id="bgMusic" src="./TraoCaDoiChoAnh.mp3" preload="auto" loop></audio>
+
+    <script>
+        const letterBody = document.querySelector(".letter-body");
+        const scrollDown = document.getElementById("scrollDown");
+
+        // theo dõi cuộn
+        letterBody.addEventListener("scroll", () => {
+        if (letterBody.scrollTop + letterBody.clientHeight >= letterBody.scrollHeight - 5) {
+            // đã tới cuối
+            scrollDown.style.display = "none";
+        } else {
+            // còn nội dung phía dưới
+            scrollDown.style.display = "block";
+        }
+        });
+
+        // bấm vào mũi tên thì cuộn xuống cuối
+        scrollDown.addEventListener("click", () => {
+        letterBody.scrollTo({
+            top: letterBody.scrollHeight,
+            behavior: "smooth"
+        });
+        });
+
+        // hàm kiểm tra sau khi gõ chữ
+        function checkScrollIndicator() {
+        if (letterBody.scrollHeight > letterBody.clientHeight) {
+            scrollDown.style.display = "block";
+        } else {
+            scrollDown.style.display = "none";
+        }
+        }
+
+      const bgMusic = document.getElementById("bgMusic");
+
+      window.addEventListener("load", () => {
+          const savedTime = localStorage.getItem("musicTime");
+          const wasPlaying = localStorage.getItem("musicPlaying") === "true";
+          if (savedTime) bgMusic.currentTime = parseFloat(savedTime);
+          if (wasPlaying) {
+              bgMusic.play().catch(() => {
+                  console.log("Autoplay bị chặn, sẽ phát khi user chạm màn hình");
+              });
+          }
+          typeEffect(); // bắt đầu gõ chữ khi load trang
+      });
+
+      
+
+      bgMusic.addEventListener("timeupdate", () => {
+          localStorage.setItem("musicTime", bgMusic.currentTime);
+      });
+
+      function enableMusicOnTouch() {
+          if (bgMusic.paused) {
+              bgMusic.play().catch(err => console.log("Không thể phát nhạc:", err));
+          }
+          document.removeEventListener("click", enableMusicOnTouch);
+          document.removeEventListener("touchstart", enableMusicOnTouch);
+      }
+      document.addEventListener("click", enableMusicOnTouch);
+      document.addEventListener("touchstart", enableMusicOnTouch);
+
+      function goNext() {
+          localStorage.setItem("musicTime", bgMusic.currentTime);
+          localStorage.setItem("musicPlaying", !bgMusic.paused);
+          window.location.href = 'batngo.html';
+      }
+
+      // Hiệu ứng gõ chữ
+      const textContent = 
+`Gửi người em thương,
+
+Vậy là đã 2 năm kể từ ngày mình chính thức bước vào hành trình mang tên “chúng ta”.
+Hai năm – không quá dài, nhưng đủ để em biết rằng, tình yêu này không chỉ là cảm xúc thoáng qua, mà là cả một chặng đường của sự cố gắng, thấu hiểu và bao dung.
+
+Đó là những lần mình giận dỗi😤, những cái nắm tay thật chặt🤝, những giọt nước mắt em rơi😭, hay cả những khi anh im lặng🫤 làm em thấy tủi thân.
+Nhưng rồi, sau tất cả, chúng ta vẫn chọn ở lại bên nhau, vẫn chọn “mình” thay vì “một mình"👤.
+
+Hai năm qua, em học được cách yêu💗, cách lắng nghe💁‍♀️ và cách tha thứ🙆‍♀️ — tất cả là nhờ anh.
+Em biết, phía trước vẫn còn nhiều thử thách, nhiều điều chưa thể đoán trước… nhưng em mong anh sẽ luôn chân cứng đá mềm, mạnh mẽ vượt qua mọi điều, và nhất là mở lòng mình hơn – cả với em, và với Thiên Chúa 🙏.
+
+Em luôn cầu nguyện cho anh và gia đình anh – mong Chúa dẫn dắt anh đi trên con đường bình an, sáng suốt và đầy ơn lành.
+Em không muốn tình yêu của mình chỉ gói gọn trong những con số của thời gian, mà sẽ là một hành trình dài, nơi hai trái tim cùng hướng về nhau, cùng lớn lên trong đức tin và tình yêu.
+
+👩‍❤️‍👨 “Ừ, mình đã từng chọn nhau, và em vẫn muốn chọn anh – thêm một lần, rồi thêm nhiều lần nữa.”
+
+Chúc cho chúng ta – luôn dịu dàng, kiên vững và chân thành như những ngày đầu 💖
+
+Thương anh nhiều lắm 💗
+– Thùy Dung❣️`;
+
+      const letterText = document.getElementById("letterText");
+      const surpriseBtn = document.getElementById("surpriseBtn");
+      let i = 0;
+
+      function typeEffect() {
+        if (i < textContent.length) {
+          letterText.textContent += textContent.charAt(i);
+          letterText.scrollTop = letterText.scrollHeight;
+
+          i++;
+          setTimeout(typeEffect, 70); // tốc độ gõ
+        } else {
+          letterText.style.borderRight = "none";
+          surpriseBtn.style.display = "block";
+          checkScrollIndicator();
+        }
+      }
+    </script>
+</body>
+</html>
